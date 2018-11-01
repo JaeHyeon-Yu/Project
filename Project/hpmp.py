@@ -11,10 +11,7 @@ class Hp:
 
 
     def draw(self):
-        i = 0
-        while i < self.hp:
-            self.image.draw(30, 300)
-            i += 1
+        self.image.clip_draw(0, 0, 30, 200, 30, 300)
 
 
 class Mp:
@@ -26,7 +23,4 @@ class Mp:
 
 
     def draw(self):
-        i = 0
-        while i < self.mp:
-            self.image.draw(800-30, 300)
-            i += 1
+        self.image.clip_draw(0, 0, 30, 200, 800-30, 300)
