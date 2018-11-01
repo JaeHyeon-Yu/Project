@@ -2,6 +2,7 @@ from pico2d import *
 import game_framework
 from bullet_class import *
 from buff_class import *
+from hpmp import *
 import game_world
 
 
@@ -13,7 +14,7 @@ class Player:
         self.image = None
         self.before = None
 
-        self.hp, self.mp = 10, 10
+        self.hp, self.mp = Hp(), 10
 
         self.gun = False
         self.bullet = Bullet()
@@ -36,10 +37,11 @@ class Player:
     def Initialize(self):
         self.x, self.y = 100,  410
         self.image = load_image('sprites/zerox.png')
+        self.hp.Initilize()
 
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
-
+        self.hp.draw()
         if self.gun is True:
             self.bullet.draw()
         elif self.buff_on is True:
