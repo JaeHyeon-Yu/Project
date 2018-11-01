@@ -20,5 +20,13 @@ class Hp:
 class Mp:
     def __init__(self):
         self.mp = 10
+        self.image = None
+    def Initilize(self):
         self.image = load_image('sprites/player_mp.png')
 
+
+    def draw(self):
+        i = 0
+        while i < self.mp:
+            self.image.draw(800-30, 300)
+            i += 1
