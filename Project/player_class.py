@@ -168,7 +168,9 @@ class Player:
     def Mana_Animation(self):
         pass #8
     def Gun_Animation(self):
-        if self.frame is 5:
+        if self.frame is 0:
+            self.mp.update(3)
+        elif self.frame is 5:
             self.size_x = 88
         elif self.frame is 6:
             self.size_x = 100
@@ -176,6 +178,7 @@ class Player:
             self.size_x = 120
         elif self.frame is 8:
             self.gun = True
+            self.size_x = 80
             self.bullet.Initialize(self.x, self.y)
             game_world.add_object(self.bullet, 1)
         else:
@@ -188,6 +191,7 @@ class Player:
             self.animation = 0
     def Fire_Animation(self):
         if self.frame is 0:
+            self.mp.update(5)
             self.size_x = 120
             self.size_y = 120
         elif self.frame is 1:
