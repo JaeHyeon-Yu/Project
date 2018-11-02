@@ -41,3 +41,4 @@ class Card:
 
     def delete(self):
         self.use = True
+        self.image = None

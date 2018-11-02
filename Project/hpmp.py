@@ -11,6 +11,8 @@ class Hp:
 
     def update(self, num):
         self.hp -= num
+        if self.hp > 10:
+            self.hp = 10
 
 
     def draw(self):
@@ -26,6 +28,8 @@ class Mp:
 
     def update(self, num):
         self.mp -= num
+        if self.mp > 10:
+            self.mp = 10
 
 
     def draw(self):
