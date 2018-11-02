@@ -9,6 +9,9 @@ class Hp:
     def Initilize(self):
         self.image = load_image('sprites/player_hp.png')
 
+    def update(self, num):
+        self.hp -= num
+
 
     def draw(self):
         self.image.clip_draw(0, 0, 30, 200, 30, 300)
@@ -20,6 +23,9 @@ class Mp:
         self.image = None
     def Initilize(self):
         self.image = load_image('sprites/player_mp.png')
+
+    def update(self, num):
+        self.mp -= num
 
 
     def draw(self):
