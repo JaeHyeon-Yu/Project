@@ -10,6 +10,8 @@ hero = game_class.Player()
 map = game_class.Background()
 image = None
 
+turn = 0
+
 def enter():
     global image
     image = load_image('sprites/stage.png')
@@ -21,6 +23,7 @@ def exit():
     del(image)
 
 def handle_events():
+    global turn
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -31,6 +34,11 @@ def handle_events():
                 if card.Click(x, y) is True:
                     hero.update_animation(card.number)
                     card.delete()
+                    turn += 1
+        else:
+            if turn is 3:
+                game_framework.pop_state()
+
 def draw():
     clear_canvas()
     map.draw()

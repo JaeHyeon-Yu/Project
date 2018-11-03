@@ -15,12 +15,6 @@ class Card:
         self.tx, self.ty = tx, ty
         self.use = False
 
-        if num is 3:
-            self.mp = 3
-        elif num is 5:
-            self.mp = 5
-
-
 
     def draw(self):
         if self.use is False:

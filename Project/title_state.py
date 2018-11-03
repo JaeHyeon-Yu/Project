@@ -20,6 +20,7 @@ def enter():
     deck[2].Initialize(3, load_image('sprites/card/003.png'), 170 + 114 * 2, 480)
     deck[3].Initialize(4, load_image('sprites/card/004.png'), 170 + 114 * 3, 480)
     deck[4].Initialize(5, load_image('sprites/card/005.png'), 170 + 114 * 4, 480)
+
     deck[5].Initialize(6, load_image('sprites/card/006.png'), 170 + 114 * 0, 320)
     deck[6].Initialize(7, load_image('sprites/card/007.png'), 170 + 114 * 1, 320)
     deck[7].Initialize(8, load_image('sprites/card/008.png'), 170 + 114 * 2, 320)
