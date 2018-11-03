@@ -142,7 +142,7 @@ class Player:
         if self.frame is 9:
             self.frame = 0
             self.animation = 0
-        if self.frame is 3 or self.frame is 4:
+        elif self.frame is 3 or self.frame is 4:
             self.size_x = 160
         elif self.frame is 5:
             self.size_x = 140
@@ -164,9 +164,11 @@ class Player:
         self.animation = 0
         self.frame = 0
     def Heal_Animation(self):
-        pass #7
+        self.hp.update(-2)
+        self.animation = 0
     def Mana_Animation(self):
-        pass #8
+        self.mp.update(-2)
+        self.animation = 0
     def Gun_Animation(self):
         if self.frame is 0:
             self.mp.update(3)
