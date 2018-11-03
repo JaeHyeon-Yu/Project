@@ -37,6 +37,11 @@ def handle_events():
                     turn += 1
         else:
             if turn is 3:
+
+                for card in title_state.card_stack:
+                    card.delete()
+                turn = 0
+                title_state.stack = 0
                 game_framework.pop_state()
 
 def draw():
