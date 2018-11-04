@@ -105,9 +105,12 @@ class Player:
         self.frame = 0
     def Idle_Animation(self):
         self.size_x = 75
+        self.size_y = 100
         self.frame_x, self.frame_y = self.Idle_animation[self.frame]
         self.frame = (self.frame + 1) % 2
     def Run_Animation(self):
+        self.size_x = 75
+        self.size_y = 100
         self.frame_x, self.frame_y = self.run_animation[self.frame]
         self.frame = (self.frame + 1) % 16
         self.x += 200 // 16
@@ -116,6 +119,8 @@ class Player:
             self.frame = 0
             self.animation = 0
     def Back_Animation(self):
+        self.size_x = 75
+        self.size_y = 100
         self.frame_x, self.frame_y = self.back_animation[self.frame]
         self.frame = (self.frame+1) % 8
         self.x -= 200 // 8
@@ -125,6 +130,8 @@ class Player:
             self.animation = 0          # 미완
 
     def Jump_Animation(self):
+        self.size_x = 75
+        self.size_y = 100
         self.frame_x, self.frame_y = self.jump_animation[self.frame]
         self.frame = (self.frame + 1) % 6
         self.y += 200//6
@@ -134,9 +141,10 @@ class Player:
             self.animation = 0
 
     def Down_Animation(self):
-        pass #4
+        pass
 
     def Attck_Animation(self):
+        self.size_y = 100
         if self.frame is 3 or self.frame is 4:
             self.size_x = 160
         elif self.frame is 5:
@@ -167,18 +175,25 @@ class Player:
             self.animation = 0
 
     def Defense_Animation(self):
+        self.size_x = 75
+        self.size_y = 100
         if self.buff_on is False:
             self.buff.Initiallize(load_image('sprites/defense.png'), 1, self.x, self.y)
         self.buff_on = True
         self.animation = 0
         self.frame = 0
     def Heal_Animation(self):
+        self.size_x = 75
+        self.size_y = 100
         self.hp.update(-2)
         self.animation = 0
     def Mana_Animation(self):
+        self.size_x = 75
+        self.size_y = 100
         self.mp.update(-2)
         self.animation = 0
     def Gun_Animation(self):
+        self.size_y = 100
         if self.frame is 0:
             self.mp.update(3)
         elif self.frame is 5:
