@@ -25,10 +25,9 @@ class Player:
 
         self.hp, self.mp = Hp(), Mp()
 
-        self.gun = False
+        self.Gun_is_Fired = False
         self.bullet = Bullet()
         self.buff = Buff()
-        self.buff_on = False
 
 
         self.animation = 0
@@ -51,10 +50,9 @@ class Player:
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
         self.hp.draw()
         self.mp.draw()
-        if self.gun is True:
+        if self.Gun_is_Fired is True:
             self.bullet.draw()
-        elif self.buff_on is True:
-            self.buff.draw()
+            
     def update(self):
         if self.animation is 0:
             self.Idle_Animation()
