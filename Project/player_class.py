@@ -17,7 +17,7 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 class Player:
     def __init__(self):
-        self.x, self.y = None, None
+        self.x, self.y = 100, 410
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = 80, 100
         self.image = None
@@ -32,23 +32,21 @@ class Player:
 
 
         self.animation = 0
-        self.Idle_animation = [(0, 900), (75, 900)]   # 0
-        self.run_animation = [(0, 500), (80, 500), (160, 500), (240, 500), (320, 500), (400, 500), (480, 500), (570, 500), (650, 500), (740, 500), (820, 500), (895, 500), (975, 500), (1055, 500), (1135, 500), (1220, 500)]    # 1
-        self.back_animation = [(0, 900), (75, 900), (150, 900), (230, 900), (300, 900), (230, 900), (150, 900), (75, 900)]
-        self.jump_animation = [(0, 760), (70, 745), (202, 740), (270, 740), (202, 740), (70, 745)]  # 3    # 나중에 찾자.....
+        self.Idle_animation = [(0, 900, 75, 100), (75, 900, 75, 100)]   # 0
+        self.run_animation = [(0, 500, 75, 100), (80, 500, 75, 100), (160, 500, 75, 100), (240, 500, 75, 100), (320, 500, 75, 100), (400, 500, 75, 100), (480, 500, 75, 100), (570, 500, 75, 100), (650, 500, 75, 100), (740, 500, 75, 100), (820, 500, 75, 100), (895, 500, 75, 100), (975, 500, 75, 100), (1055, 500, 75, 100), (1135, 500, 75, 100), (1220, 500, 75, 100)]    # 1
+        self.back_animation = [(0, 900, 75, 100), (75, 900, 75, 100), (150, 900, 75, 100), (230, 900, 75, 100), (300, 900, 75, 100), (230, 900, 75, 100), (150, 900, 75, 100), (75, 900, 75, 100)]
+        self.jump_animation = [(0, 760, 75, 100), (70, 745, 75, 100), (202, 740, 75, 100), (270, 740, 75, 100), (202, 740, 75, 100), (70, 745, 75, 100)]  # 3    # 나중에 찾자.....
         self.down_animation = None
-        self.attack_animation = [(0, 420), (90, 420), (182, 420), (265, 420), (440, 420), (605, 420), (760, 420), (880, 420), (1000, 420), (90, 420)]  # 5
+        self.attack_animation = [(0, 420, 80, 100), (90, 420, 80, 100), (182, 420, 80, 100), (265, 420, 160, 100), (440, 420, 160, 100), (605, 420, 140, 100), (760, 420, 105, 100), (880, 420, 105, 100), (1000, 420, 80, 100), (90, 420, 80, 100)]  # 5
         self.defence_animation = [(0, 0), (50, 0), (100, 0)]
 
-        self.gun_animation = [(0, 630), (75, 630), (155, 630), (240, 630), (325, 630), (408, 630), (492, 630), (600, 630), (325, 630), (240, 630), (155, 630)]  # 9
-        self.fire_animation = [(5, 1260), (117 ,1250), (270 ,1250), (410, 1250), (550, 1250), (685, 1265), (835, 1265), (980, 1265), (1130, 1265), (1260, 1265), (0, 1025)]
+        self.gun_animation = [(0, 630, 80, 100), (75, 630, 80, 100), (155, 630, 80, 100), (240, 630, 80, 100), (325, 630, 80, 100), (408, 630, 88, 100), (492, 630, 100, 100), (600, 630, 120, 100), (325, 630, 80, 100), (240, 630, 80, 100), (155, 630, 80, 100)]  # 9
+        self.fire_animation = [(5, 1260, 120, 120), (117 ,1250, 150, 140), (270 ,1250, 140, 140), (410, 1250, 140, 150), (550, 1250, 140, 150), (685, 1265, 150, 160), (835, 1265, 150, 160), (980, 1265, 150, 180), (1130, 1265, 150, 180), (1260, 1265, 140, 180), (0, 1025, 140, 180)]
         self.frame = 0
     def Initialize(self):
-        self.x, self.y = 100,  410
-        self.image = load_image('sprites/zerox.png')
+        self.image = load_image('sprites\\zerox.png')
         self.hp.Initilize()
         self.mp.Initilize()
-
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
         self.hp.draw()
@@ -57,7 +55,6 @@ class Player:
             self.bullet.draw()
         elif self.buff_on is True:
             self.buff.draw()
-
     def update(self):
         if self.animation is 0:
             self.Idle_Animation()
@@ -96,7 +93,6 @@ class Player:
             self.bullet.update()
         if self.buff_on is True:
             self.buff.update()
-
     def handle_events(self):
         pass
     def update_animation(self, num):
@@ -104,14 +100,10 @@ class Player:
         self.size_x = 75
         self.frame = 0
     def Idle_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
-        self.frame_x, self.frame_y = self.Idle_animation[self.frame]
+        self.frame_x, self.frame_y, self.size_x, self.y = self.Idle_animation[self.frame]
         self.frame = (self.frame + 1) % 2
     def Run_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
-        self.frame_x, self.frame_y = self.run_animation[self.frame]
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation[self.frame]
         self.frame = (self.frame + 1) % 16
         self.x += 200 // 16
         if self.frame is 15:
@@ -119,61 +111,30 @@ class Player:
             self.frame = 0
             self.animation = 0
     def Back_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
-        self.frame_x, self.frame_y = self.back_animation[self.frame]
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.back_animation[self.frame]
         self.frame = (self.frame+1) % 8
         self.x -= 200 // 8
         if self.frame is 15:
             self.x = 300
             self.frame = 0
             self.animation = 0          # 미완
-
     def Jump_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
-        self.frame_x, self.frame_y = self.jump_animation[self.frame]
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.jump_animation[self.frame]
         self.frame = (self.frame + 1) % 6
         self.y += 200//6
 
         if self.frame is 5:
             self.frame = 0
             self.animation = 0
-
     def Down_Animation(self):
         pass
-
     def Attck_Animation(self):
-        self.size_y = 100
-        if self.frame is 3 or self.frame is 4:
-            self.size_x = 160
-        elif self.frame is 5:
-            self.size_x = 140
-        elif self.frame is 6 or self.frame is 7:
-            self.size_x = 105
-        else:
-            self.size_x = 80
-        self.frame_x, self.frame_y = self.attack_animation[self.frame]
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_animation[self.frame]
         self.frame = (self.frame + 1) % 10
 
         if self.frame is 9:
             self.frame = 0
             self.animation = 0
-        elif self.frame is 3 or self.frame is 4:
-            self.size_x = 160
-        elif self.frame is 5:
-            self.size_x = 140
-        elif self.frame is 6 or self.frame is 7:
-            self.size_x = 105
-        else:
-            self.size_x = 80
-        self.frame_x, self.frame_y = self.attack_animation[self.frame]
-        self.frame = (self.frame+1)% 10
-
-        if self.frame is 9:
-            self.frame = 0
-            self.animation = 0
-
     def Defense_Animation(self):
         self.size_x = 75
         self.size_y = 100
@@ -193,61 +154,24 @@ class Player:
         self.mp.update(-2)
         self.animation = 0
     def Gun_Animation(self):
-        self.size_y = 100
         if self.frame is 0:
             self.mp.update(3)
-        elif self.frame is 5:
-            self.size_x = 88
-        elif self.frame is 6:
-            self.size_x = 100
-        elif self.frame is 7:
-            self.size_x = 120
         elif self.frame is 8:
             self.gun = True
-            self.size_x = 80
             self.bullet.Initialize(self.x, self.y)
             game_world.add_object(self.bullet, 1)
-        else:
-            self.size_x = 80
-        self.frame_x, self.frame_y = self.gun_animation[self.frame]
-        self.frame = (self.frame + 1) % 11
-
-        if self.frame is 10:
+        elif self.frame is 10:
             self.frame = 0
             self.animation = 0
+
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.gun_animation[self.frame]
+        self.frame = (self.frame + 1) % 11
     def Fire_Animation(self):
         if self.frame is 0:
             self.mp.update(5)
-            self.size_x = 120
-            self.size_y = 120
-        elif self.frame is 1:
-            self.size_x = 150
-            self.size_y = 140
-        elif self.frame is 2:
-            self.size_x = 140
-            self.size_y = 140
-        elif self.frame is 3 or self.frame is 4:
-            self.size_x = 140
-            self.size_y = 150
-        elif self.frame is 5 or self.frame is 6:
-            self.size_x = 150
-            self.size_y = 160
-        elif self.frame is 7 or self.frame is 9:
-            self.size_x = 150
-            self.size_y = 180
-        elif self.frame is 8 or self.frame is 10:
-            self.size_x = 140
-            self.size_y = 180
-        else:
-            self.size_x = 100
-            self.size_y = 100
-
-        self.frame_x, self.frame_y = self.fire_animation[self.frame]
-        self.frame = (self.frame+1)%11
-
-        if self.frame is 10:
+        elif self.frame is 10:
             self.animation = 0
             self.frame = 0
-            self.size_x = 75
-            self.size_y = 100
 
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.fire_animation[self.frame]
+        self.frame = (self.frame+1)%11
