@@ -6,17 +6,21 @@ import game_world
 
 
 name= 'MainState'
-hero = game_class.Player()
-map = game_class.Background()
+hero = None
+map = None
 image = None
 
 turn = 0
 
 def enter():
     global image
-    image = load_image('sprites/stage.png')
-    hero.Initialize()
-    map.Initialize(load_image('sprites/map1.jpg'))
+    image = load_image('sprites\\map\\stage.png')
+
+    global hero
+    hero = game_class.Player()
+
+    global map
+    map = game_class.Background(0)
 
 def exit():
     global image
@@ -48,6 +52,7 @@ def draw():
     clear_canvas()
     map.draw()
     image.draw(400, 300)
+
     hero.draw()
 
     for card in title_state.card_stack:

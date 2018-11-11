@@ -4,10 +4,7 @@ import game_framework
 class Hp:
     def __init__(self):
         self.hp = 10
-        self.image = None
-
-    def Initilize(self):
-        self.image = load_image('sprites/player_hp.png')
+        self.image = load_image('sprites\\player\\player_hp.png')
 
     def update(self, num):
         self.hp -= num
@@ -22,9 +19,7 @@ class Hp:
 class Mp:
     def __init__(self):
         self.mp = 10
-        self.image = None
-    def Initilize(self):
-        self.image = load_image('sprites/player_mp.png')
+        self.image = load_image('sprites\\player\\player_mp.png')
 
     def update(self, num):
         self.mp -= num

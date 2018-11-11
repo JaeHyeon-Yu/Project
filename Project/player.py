@@ -1,7 +1,7 @@
 from pico2d import *
 import game_framework
-from bullet_class import *
-from buff_class import *
+from bullet import *
+from buff import *
 from hpmp import *
 import game_world
 
@@ -31,13 +31,13 @@ class Player:
         self.x, self.y = 100, 410
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = 80, 100
-        self.image = None
+        self.image = load_image('sprites\\player\\zerox.png')
 
         self.hp, self.mp = Hp(), Mp()
 
         self.gun_is_fired = False
-        self.bullet = Bullet()
-        self.buff = Buff()
+        self.bullet = None
+        self.buff = None
 
 
         self.now_animation = IDLE_STATE
@@ -52,10 +52,7 @@ class Player:
         self.gun_animation_pos = [(0, 630, 80, 100), (75, 630, 80, 100), (155, 630, 80, 100), (240, 630, 80, 100), (325, 630, 80, 100), (408, 630, 88, 100), (492, 630, 100, 100), (600, 630, 120, 100), (325, 630, 80, 100), (240, 630, 80, 100), (155, 630, 80, 100)]  # 9
         self.fire_animation_pos = [(5, 1260, 120, 120), (117 ,1250, 150, 140), (270 ,1250, 140, 140), (410, 1250, 140, 150), (550, 1250, 140, 150), (685, 1265, 150, 160), (835, 1265, 150, 160), (980, 1265, 150, 180), (1130, 1265, 150, 180), (1260, 1265, 140, 180), (0, 1025, 140, 180)]
         self.frame = 0
-    def Initialize(self):
-        self.image = load_image('sprites\\zerox.png')
-        self.hp.Initilize()
-        self.mp.Initilize()
+
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
         self.hp.draw()
@@ -101,11 +98,10 @@ class Player:
     def handle_events(self):
         pass
     def update_animation(self, num):
-        self.animation = num
-        self.size_x = 75
+        self.now_animation = num
         self.frame = 0
     def Idle_Animation(self):
-        self.frame_x, self.frame_y, self.size_x, self.y = self.Idle_animation_pos[self.frame]
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.Idle_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 2
     def Run_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
@@ -157,7 +153,7 @@ class Player:
             self.mp.update(3)
         elif self.frame is 8:
             self.gun_is_fired = True
-            self.bullet.Initialize(self.x, self.y)
+            self.bullet = Bullet(self.x, self.y)
             game_world.add_object(self.bullet, 1)
         elif self.frame is 10:
             self.Change_to_IDLE()

@@ -2,13 +2,9 @@ from pico2d import *
 import game_world
 
 class Bullet:
-    def __init__(self):
-        self.x, self.y = None, None
-        self.image = None
-
-    def Initialize(self, x, y):
+    def __init__(self, x, y):
         self.x, self.y = x + 70, y
-        self.image = load_image('sprites/bullet.png')
+        self.image = load_image('sprites\\player\\bullet.png')
 
     def update(self):
         self.x += 10

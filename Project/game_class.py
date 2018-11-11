@@ -1,7 +1,7 @@
 from pico2d import *
 
-from card_class import *
+from card import *
 from player import *
-from monster_class import *
-from back_class import *
+from monster import *
+from background import *
 from hpmp import *
