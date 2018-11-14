@@ -9,6 +9,7 @@ name= 'MainState'
 hero = None
 map = None
 image = None
+monster = None
 
 turn = 0
 
@@ -21,6 +22,9 @@ def enter():
 
     global map
     map = game_class.Background(0)
+
+    global monster
+    monster = game_class.Monster(0)
 
 def exit():
     global image
@@ -54,6 +58,7 @@ def draw():
     image.draw(400, 300)
 
     hero.draw()
+    monster.draw()
 
     for card in title_state.card_stack:
         card.draw()

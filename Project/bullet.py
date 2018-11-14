@@ -8,8 +8,8 @@ class Bullet:
 
     def update(self):
         self.x += 10
-        if self.x > 600:
-            game_world.remove_object(1)
+        if self.x > 400:
+            game_world.remove_object(self)
 
     def draw(self):
         self.image.draw(self.x , self.y)
