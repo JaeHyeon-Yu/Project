@@ -10,22 +10,27 @@ class Monster:
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = None, None
         self.frame = 0
-        self.now_animation = IDLE_STATE
+        self.now_animation = 1
 
         self.hp, self.mp = 10, 10
         self.damage = 1
         self.image = load_image('sprites\\Enermy\\grunt2.png')
 
         self.idle_state_pos = [(0, 790, 80, 70), (70, 790, 80, 70), (140, 790, 80, 70)]
+        self.run_state_pos = [(10, 600, 70, 70), (90, 600, 70, 70), (170, 600, 70, 70), (250, 600, 70, 70), (330, 600, 70, 70), (415, 600, 75, 70), (330, 600, 70, 70), (250, 600, 70, 70)]
 
 
     def update(self):
         if self.now_animation is IDLE_STATE:
             self.Idle_Animation()
-
+        elif self.now_animation is RUN_STATE:
+            self.Run_Animation()
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
 
     def Idle_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.idle_state_pos[self.frame]
         self.frame = (self.frame + 1) % 3
+    def Run_Animation(self):
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
+        self.frame = (self.frame + 1) % 8
