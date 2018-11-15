@@ -24,7 +24,7 @@ def enter():
     map = game_class.Background(0)
 
     global monster
-    monster = game_class.Monster(0)
+    monster = game_class.Monster()
 
 def exit():
     global image
@@ -67,6 +67,7 @@ def draw():
 
 def update():
     hero.update()
+    monster.update()
 
 def pause():
     pass
