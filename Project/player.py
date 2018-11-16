@@ -32,6 +32,7 @@ class Player:
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = 80, 100
         self.image = load_image('sprites\\player\\zerox.png')
+        self.my_turn = False
 
         self.hp, self.mp = Hp(), Mp()
 
@@ -60,7 +61,10 @@ class Player:
         if self.gun_is_fired is True:
             self.bullet.draw()
     def update(self):
-        if self.now_animation is IDLE_STATE:
+        if self.my_turn is False:
+            self.Idle_Animation()
+
+        elif self.now_animation is IDLE_STATE:
             self.Idle_Animation()
 
         elif self.now_animation is RUN_STATE:

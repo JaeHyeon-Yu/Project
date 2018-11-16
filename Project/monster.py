@@ -11,6 +11,7 @@ class Monster:
         self.size_x, self.size_y = None, None
         self.frame = 0
         self.now_animation = 2
+        self.my_turn = False
 
         self.hp, self.mp = 10, 10
         self.damage = 1
@@ -22,7 +23,9 @@ class Monster:
 
 
     def update(self):
-        if self.now_animation is IDLE_STATE:
+        if self.my_turn is False:
+            self.Idle_Animation()
+        elif self.now_animation is IDLE_STATE:
             self.Idle_Animation()
         elif self.now_animation is RUN_STATE:
             self.Run_Animation()
