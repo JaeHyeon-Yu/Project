@@ -50,7 +50,8 @@ class Monster:
 
         if self.frame is 7:
             self.Change_to_IDLE()
-            
+
     def Change_to_IDLE(self):
+        self.my_turn = False
         self.now_animation = IDLE_STATE
         self.frame = 0

@@ -32,7 +32,7 @@ class Player:
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = 80, 100
         self.image = load_image('sprites\\player\\zerox.png')
-        self.my_turn = False
+        self.my_turn = True
 
         self.hp, self.mp = Hp(), Mp()
 
@@ -176,3 +176,4 @@ class Player:
     def Change_to_IDLE(self):
         self.frame = 0
         self.now_animation = IDLE_STATE
+        self.my_turn = False
