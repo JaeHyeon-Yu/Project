@@ -47,7 +47,6 @@ def handle_events():
                     turn += 1
         else:
             if turn is 3:
-
                 for card in title_state.card_stack:
                     card.delete()
                 turn = 0

@@ -1,4 +1,5 @@
 from pico2d import *
+import main_state
 
 IDLE_STATE = 0
 RUN_STATE = 1
@@ -25,6 +26,11 @@ class Monster:
     def update(self):
         if self.my_turn is False:
             self.Idle_Animation()
+            hero = main_state.get_player()
+            if hero.My_Turn_is_Now() is False:
+                self.my_turn = True
+                self.now_animation = RUN_STATE
+
         elif self.now_animation is IDLE_STATE:
             self.Idle_Animation()
         elif self.now_animation is RUN_STATE:
