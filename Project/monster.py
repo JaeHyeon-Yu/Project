@@ -55,3 +55,6 @@ class Monster:
         self.my_turn = False
         self.now_animation = IDLE_STATE
         self.frame = 0
+
+    def Change_My_Turn(self):
+        self.my_turn = True

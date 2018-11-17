@@ -177,3 +177,6 @@ class Player:
         self.frame = 0
         self.now_animation = IDLE_STATE
         self.my_turn = False
+
+    def Change_My_Turn(self):
+        self.my_turn = True
