@@ -74,3 +74,11 @@ def pause():
 
 def resume():
     pass
+
+
+def get_player():
+    return hero
+
+
+def get_monster():
+    return monster
