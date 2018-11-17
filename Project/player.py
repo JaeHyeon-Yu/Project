@@ -180,3 +180,6 @@ class Player:
 
     def Change_My_Turn(self):
         self.my_turn = True
+
+    def My_Turn_is_Now(self):
+        return self.my_turn

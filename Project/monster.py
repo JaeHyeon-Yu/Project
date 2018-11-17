@@ -10,7 +10,7 @@ class Monster:
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = None, None
         self.frame = 0
-        self.now_animation = 2
+        self.now_animation = IDLE_STATE
         self.my_turn = False
 
         self.hp, self.mp = 10, 10

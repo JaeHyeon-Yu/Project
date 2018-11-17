@@ -37,6 +37,8 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_MOUSEBUTTONDOWN:
+            if hero.My_Turn_is_Now() is False:
+                break
             x, y = event.x, 600 - 1 - event.y
             for card in title_state.card_stack:
                 if card.Click(x, y) is True:
@@ -82,3 +84,4 @@ def get_player():
 
 def get_monster():
     return monster
+
