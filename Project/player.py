@@ -115,12 +115,14 @@ class Player:
         self.x += 200 // 16
         if self.frame is 15:
             self.Change_to_IDLE()
+            self.on_tile += 1
     def Back_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
         self.x -= 200 // 16
         if self.frame is 15:
             self.Change_to_IDLE()
+            self.on_tile -= 1
 
 
     def Jump_Animation(self):
@@ -130,8 +132,9 @@ class Player:
 
         if self.frame is 5:
             self.Change_to_IDLE()
+            self.on_tile -= 4
     def Down_Animation(self):
-        pass
+        self.on_tile += 4
     def Attck_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 10
