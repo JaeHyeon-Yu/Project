@@ -13,6 +13,7 @@ class Monster:
         self.frame = 0
         self.now_animation = IDLE_STATE
         self.my_turn = False
+        self.num_of_turn = 0
 
         self.hp, self.mp = 10, 10
         self.damage = 1
@@ -22,6 +23,7 @@ class Monster:
         self.run_state_pos = [(10, 600, 70, 70), (90, 600, 70, 70), (170, 600, 70, 70), (250, 600, 70, 70), (330, 600, 70, 70), (415, 600, 75, 70), (330, 600, 70, 70), (250, 600, 70, 70)]
         self.attack_state_pos = [(10, 300, 70, 70), (85, 305, 70, 70), (160, 305, 70, 75), (240, 305, 70, 75), (300, 305, 70, 75), (380, 305, 70, 75), (475, 305, 70, 75), (565, 305, 70, 75)]
 
+        self.on_tile = None
 
     def update(self):
         if self.my_turn is False:
@@ -53,14 +55,17 @@ class Monster:
     def Attack_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_state_pos[self.frame]
         self.frame = (self.frame+1) % 8
-
+        self.x -= 200//8
         if self.frame is 7:
             self.Change_to_IDLE()
 
     def Change_to_IDLE(self):
-        self.my_turn = False
         self.now_animation = IDLE_STATE
         self.frame = 0
 
     def Change_My_Turn(self):
-        self.my_turn = True
+        if self.my_turn is False:
+            self.my_turn = True
+        else:
+            self.my_turn = False
+

@@ -46,13 +46,15 @@ class Player:
         self.run_animation_pos = [(0, 500, 75, 100), (80, 500, 75, 100), (160, 500, 75, 100), (240, 500, 75, 100), (320, 500, 75, 100), (400, 500, 75, 100), (480, 500, 75, 100), (570, 500, 75, 100), (650, 500, 75, 100), (740, 500, 75, 100), (820, 500, 75, 100), (895, 500, 75, 100), (975, 500, 75, 100), (1055, 500, 75, 100), (1135, 500, 75, 100), (1220, 500, 75, 100)]    # 1
         self.back_animation_pos = [(0, 900, 75, 100), (75, 900, 75, 100), (150, 900, 75, 100), (230, 900, 75, 100), (300, 900, 75, 100), (230, 900, 75, 100), (150, 900, 75, 100), (75, 900, 75, 100)]
         self.jump_animation_pos = [(0, 760, 75, 100), (70, 745, 75, 100), (202, 740, 75, 100), (270, 740, 75, 100), (202, 740, 75, 100), (70, 745, 75, 100)]  # 3    # 나중에 찾자.....
-        self.down_animation_pos = None
+
         self.attack_animation_pos = [(0, 420, 80, 100), (90, 420, 80, 100), (182, 420, 80, 100), (265, 420, 160, 100), (440, 420, 160, 100), (605, 420, 140, 100), (760, 420, 105, 100), (880, 420, 105, 100), (1000, 420, 80, 100), (90, 420, 80, 100)]  # 5
         self.defence_animation_pos = [(0, 0), (50, 0), (100, 0)]
 
         self.gun_animation_pos = [(0, 630, 80, 100), (75, 630, 80, 100), (155, 630, 80, 100), (240, 630, 80, 100), (325, 630, 80, 100), (408, 630, 88, 100), (492, 630, 100, 100), (600, 630, 120, 100), (325, 630, 80, 100), (240, 630, 80, 100), (155, 630, 80, 100)]  # 9
         self.fire_animation_pos = [(5, 1260, 120, 120), (117 ,1250, 150, 140), (270 ,1250, 140, 140), (410, 1250, 140, 150), (550, 1250, 140, 150), (685, 1265, 150, 160), (835, 1265, 150, 160), (980, 1265, 150, 180), (1130, 1265, 150, 180), (1260, 1265, 140, 180), (0, 1025, 140, 180)]
         self.frame = 0
+
+        self.on_tile = 5
 
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
@@ -112,16 +114,15 @@ class Player:
         self.frame = (self.frame + 1) % 16
         self.x += 200 // 16
         if self.frame is 15:
-            self.x = 300
             self.Change_to_IDLE()
     def Back_Animation(self):
-        self.frame_x, self.frame_y, self.size_x, self.size_y = self.back_animation_pos[self.frame]
-        self.frame = (self.frame+1) % 8
-        self.x -= 200 // 8
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
+        self.frame = (self.frame + 1) % 16
+        self.x -= 200 // 16
         if self.frame is 15:
-            self.x = 300
-            self.frame = 0
-            self.now_animation = IDLE_STATE          # 미완
+            self.Change_to_IDLE()
+
+
     def Jump_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.jump_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 6
@@ -176,10 +177,30 @@ class Player:
     def Change_to_IDLE(self):
         self.frame = 0
         self.now_animation = IDLE_STATE
-        self.my_turn = False
 
     def Change_My_Turn(self):
-        self.my_turn = True
-
+        if self.my_turn is False:
+            self.my_turn = True
+        else:
+            self.my_turn = False
     def My_Turn_is_Now(self):
         return self.my_turn
+
+    def Use_Possible(self, card):
+        if card is 1:
+            if self.on_tile is 4 or self.on_tile is 8 or self.on_tile is 12:
+                return False
+
+        if card is 2:
+            if self.on_tile is 1 or self.on_tile is 5 or self.on_tile is 9:
+                return False
+
+        if card is 3:
+            for i in range(1, 5):
+                if self.on_tile is i:
+                    return False
+
+        if card is 4:
+            for i in range(9, 13):
+                if self.on_tile is i:
+                    return False

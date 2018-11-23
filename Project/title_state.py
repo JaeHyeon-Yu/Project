@@ -8,11 +8,13 @@ image= None
 card_stack = [game_class.Card() for i in range(5)]  # 턴 시작전 사용할 카드 선정!
 stack = 0
 
-deck = [game_class.Card() for card in range(10)]
+deck = None
+
 
 def enter():
     global image
     global deck
+    deck = [game_class.Card() for card in range(10)]
     image = load_image('sprites\\map\\cardselect.png')
     
     deck[0].Initialize(1, load_image('sprites\\card\\001.png'), 170 + 114 * 0, 480)

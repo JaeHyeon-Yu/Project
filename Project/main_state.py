@@ -42,6 +42,8 @@ def handle_events():
             x, y = event.x, 600 - 1 - event.y
             for card in title_state.card_stack:
                 if card.Click(x, y) is True:
+                    if hero.Use_Possible(card.number) is False:
+                        return
                     hero.update_animation(card.number)
                     card.delete()
                     turn += 1
