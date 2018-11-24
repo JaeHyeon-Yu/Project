@@ -55,6 +55,7 @@ class Monster:
             self.on_tile -= 1
             main_state.turn += 1
 
+
     def Attack_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_state_pos[self.frame]
         self.frame = (self.frame+1) % 8

@@ -149,7 +149,13 @@ class Player:
 
         if self.frame is 9:
             monster = main_state.get_monster()
-            monster.hp -= 1
+            if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
+                main_state.monster.hp -= 1
+                
+            main_state.monster.My_Next_Action()
+            # main_state.monster.Change_My_Turn()
+            main_state.monster.my_turn = True
+            # self.my_turn = False
             self.Change_to_IDLE()
     def Defense_Animation(self):
         self.size_x = 75
