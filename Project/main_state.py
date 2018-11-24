@@ -14,6 +14,9 @@ monster = None
 turn = 0
 
 def enter():
+    if title_state.turn >= 1:
+        return
+
     global image
     image = load_image('sprites\\map\\stage.png')
 
@@ -28,7 +31,7 @@ def enter():
 
 def exit():
     global image
-    del(image)
+    # del(image)
 
 def handle_events():
     global turn

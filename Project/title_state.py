@@ -9,7 +9,7 @@ card_stack = [game_class.Card() for i in range(5)]  # 턴 시작전 사용할 �
 stack = 0
 
 deck = None
-
+turn = 0
 
 def enter():
     global image
@@ -37,7 +37,7 @@ def exit():
 def handle_events():
     global stack
     global card_stack
-    global deck
+    global deck, turn
 
     events = get_events()
     for event in events:
@@ -48,7 +48,11 @@ def handle_events():
                 game_framework.quit()
 
             elif event.type ==SDL_KEYDOWN and event.key==SDLK_SPACE and stack==5:
+                # if turn >= 1:
+                    # game_framework.cur_state(main_state)
+
                 game_framework.push_state(main_state)
+                turn += 1
 
             elif event.type == SDL_MOUSEBUTTONDOWN:
                 x, y = event.x, 600-1-event.y

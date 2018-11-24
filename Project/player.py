@@ -4,6 +4,7 @@ from bullet import *
 from buff import *
 from hpmp import *
 import game_world
+import main_state
 
 IDLE_STATE = 0
 RUN_STATE = 1
@@ -126,20 +127,29 @@ class Player:
 
 
     def Jump_Animation(self):
-        self.frame_x, self.frame_y, self.size_x, self.size_y = self.jump_animation_pos[self.frame]
-        self.frame = (self.frame + 1) % 6
-        self.y += 200//6
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
+        self.frame = (self.frame + 1) % 16
+        self.y += 200//16
 
-        if self.frame is 5:
+        if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile -= 4
     def Down_Animation(self):
-        self.on_tile += 4
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
+        self.frame = (self.frame + 1) % 16
+        self.y -= 200 // 16
+
+        if self.frame is 15:
+            self.Change_to_IDLE()
+            self.on_tile += 4
+
     def Attck_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 10
 
         if self.frame is 9:
+            monster = main_state.get_monster()
+            monster.hp -= 1
             self.Change_to_IDLE()
     def Defense_Animation(self):
         self.size_x = 75

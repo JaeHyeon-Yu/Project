@@ -61,6 +61,12 @@ def push_state(state):
     stack.append(state)
     state.enter()
 
+def cur_state(state):
+    global stack
+    if (len(stack) > 0):
+        stack[-1].pause()
+    stack.append(state)
+
 
 
 def pop_state():
