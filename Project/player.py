@@ -152,7 +152,6 @@ class Player:
         self.frame = (self.frame + 1) % 10
 
         if self.frame is 9:
-            monster = main_state.get_monster()
             if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
                 main_state.monster.hp -= 1
 
@@ -195,6 +194,7 @@ class Player:
         elif self.frame is 10:
             self.Change_to_IDLE()
             self.Change_My_Turn()
+            main_state.monster.hp -= 10
 
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.fire_animation_pos[self.frame]
         self.frame = (self.frame+1) % 11

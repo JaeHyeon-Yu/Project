@@ -66,7 +66,7 @@ class Monster:
             self.Change_to_IDLE()
             main_state.turn += 1
             self.Change_My_Turn()
-            main_state.hero.hp -= self.damage
+            main_state.hero.hp.hp -= self.damage
 
     def Change_to_IDLE(self):
         self.now_animation = IDLE_STATE
@@ -88,3 +88,4 @@ class Monster:
                next_action = ATTACK_STATE
 
            self.now_animation = next_action
+           self.frame = 0
