@@ -31,7 +31,6 @@ def enter():
 
 def exit():
     global image
-    # del(image)
 
 def handle_events():
     global turn
@@ -49,7 +48,7 @@ def handle_events():
                         return
                     hero.update_animation(card.number)
                     card.delete()
-                    turn += 1
+
         else:
             if turn is 3:
                 for card in title_state.card_stack:

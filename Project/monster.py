@@ -53,6 +53,7 @@ class Monster:
         if self.frame is 7:
             self.Change_to_IDLE()
             self.on_tile -= 1
+            main_state.turn += 1
 
     def Attack_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_state_pos[self.frame]
@@ -60,6 +61,7 @@ class Monster:
         self.x -= 200//8
         if self.frame is 7:
             self.Change_to_IDLE()
+            main_state.turn += 1
 
     def Change_to_IDLE(self):
         self.now_animation = IDLE_STATE
