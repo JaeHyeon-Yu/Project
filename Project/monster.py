@@ -55,6 +55,7 @@ class Monster:
             self.Change_to_IDLE()
             self.on_tile -= 1
             main_state.turn += 1
+            self.Change_My_Turn()
 
 
     def Attack_Animation(self):
@@ -64,6 +65,7 @@ class Monster:
         if self.frame is 7:
             self.Change_to_IDLE()
             main_state.turn += 1
+            self.Change_My_Turn()
 
     def Change_to_IDLE(self):
         self.now_animation = IDLE_STATE
@@ -74,6 +76,8 @@ class Monster:
             self.my_turn = True
         else:
             self.my_turn = False
+            main_state.hero.Change_My_Turn()
+
 
     def My_Next_Action(self):
         if self.my_turn is True:
