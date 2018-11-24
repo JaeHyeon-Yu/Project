@@ -50,7 +50,7 @@ def handle_events():
                     card.delete()
 
         else:
-            if turn is 3:
+            if turn is 3 or monster.hp <= 0:
                 for card in title_state.card_stack:
                     card.delete()
                 turn = 0
