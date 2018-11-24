@@ -117,6 +117,7 @@ class Player:
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile += 1
+            self.Change_My_Turn()
     def Back_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
@@ -124,6 +125,7 @@ class Player:
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile -= 1
+            self.Change_My_Turn()
 
 
     def Jump_Animation(self):
@@ -134,6 +136,7 @@ class Player:
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile -= 4
+            self.Change_My_Turn()
     def Down_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
@@ -142,6 +145,7 @@ class Player:
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile += 4
+            self.Change_My_Turn()
 
     def Attck_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_animation_pos[self.frame]
@@ -151,27 +155,27 @@ class Player:
             monster = main_state.get_monster()
             if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
                 main_state.monster.hp -= 1
-                
-            main_state.monster.My_Next_Action()
-            # main_state.monster.Change_My_Turn()
-            main_state.monster.my_turn = True
-            # self.my_turn = False
+
+            self.Change_My_Turn()
             self.Change_to_IDLE()
     def Defense_Animation(self):
         self.size_x = 75
         self.size_y = 100
         self.now_animation = IDLE_STATE
         self.frame = 0
+        self.Change_My_Turn()
     def Heal_Animation(self):
         self.size_x = 75
         self.size_y = 100
         self.hp.update(-2)
         self.now_animation = IDLE_STATE
+        self.Change_My_Turn()
     def Mana_Animation(self):
         self.size_x = 75
         self.size_y = 100
         self.mp.update(-2)
         self.now_animation = IDLE_STATE
+        self.Change_My_Turn()
     def Gun_Animation(self):
         if self.frame is 0:
             self.mp.update(3)
@@ -184,11 +188,13 @@ class Player:
 
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.gun_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 11
+        # 턴 종료 추가 Bullet에다
     def Fire_Animation(self):
         if self.frame is 0:
             self.mp.update(5)
         elif self.frame is 10:
             self.Change_to_IDLE()
+            self.Change_My_Turn()
 
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.fire_animation_pos[self.frame]
         self.frame = (self.frame+1) % 11
@@ -202,6 +208,9 @@ class Player:
             self.my_turn = True
         else:
             self.my_turn = False
+            main_state.monster.Change_My_Turn()
+            main_state.monster.My_Next_Action()
+
     def My_Turn_is_Now(self):
         return self.my_turn
 

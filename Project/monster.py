@@ -49,6 +49,7 @@ class Monster:
     def Run_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
         self.frame = (self.frame + 1) % 8
+        self.x -= 200 // 8
 
         if self.frame is 7:
             self.Change_to_IDLE()
@@ -59,7 +60,7 @@ class Monster:
     def Attack_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_state_pos[self.frame]
         self.frame = (self.frame+1) % 8
-        self.x -= 200//8
+
         if self.frame is 7:
             self.Change_to_IDLE()
             main_state.turn += 1
