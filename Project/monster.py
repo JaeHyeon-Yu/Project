@@ -47,7 +47,6 @@ class Monster:
         if self.hp <= 0:
             self.game_clear.draw(400, 300)
 
-
     def Idle_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.idle_state_pos[self.frame]
         self.frame = (self.frame + 1) % 3
