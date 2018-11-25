@@ -73,7 +73,7 @@ def draw():
 def update():
     hero.update()
     monster.update()
-
+    pass
 def pause():
     pass
 

@@ -16,7 +16,7 @@ class Monster:
         self.my_turn = False
         self.num_of_turn = 0
 
-        self.hp, self.mp = 10, 10
+        self.hp, self.mp =  5, 5
         self.damage = 1
         self.image = load_image('sprites\\Enermy\\grunt2.png')
 
@@ -25,6 +25,7 @@ class Monster:
         self.attack_state_pos = [(10, 300, 70, 70), (85, 305, 70, 70), (160, 305, 70, 75), (240, 305, 70, 75), (300, 305, 70, 75), (380, 305, 70, 75), (475, 305, 70, 75), (565, 305, 70, 75)]
 
         self.on_tile = 8
+        self.game_clear = load_image('sprites/player/clear.png')
 
     def update(self):
         if self.my_turn is False:
@@ -43,6 +44,10 @@ class Monster:
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
 
+        if self.hp <= 0:
+            self.game_clear.draw(400, 300)
+
+
     def Idle_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.idle_state_pos[self.frame]
         self.frame = (self.frame + 1) % 3
@@ -57,12 +62,13 @@ class Monster:
             main_state.turn += 1
             self.Change_My_Turn()
 
-
     def Attack_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_state_pos[self.frame]
         self.frame = (self.frame+1) % 8
-
+        attack_sound = load_wav('music\\grunt_attack.wav')
+        attack_sound.set_volume(128)
         if self.frame is 7:
+            attack_sound.play()
             self.Change_to_IDLE()
             main_state.turn += 1
             self.Change_My_Turn()
@@ -78,7 +84,6 @@ class Monster:
         else:
             self.my_turn = False
             main_state.hero.Change_My_Turn()
-
 
     def My_Next_Action(self):
         if self.my_turn is True:

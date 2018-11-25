@@ -150,7 +150,10 @@ class Player:
     def Attck_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 10
+        wav = load_wav('music\\sword.wav')
+        wav.set_volume(128)
 
+        wav.play()
         if self.frame is 9:
             if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
                 main_state.monster.hp -= 1
@@ -204,7 +207,10 @@ class Player:
         self.now_animation = IDLE_STATE
 
     def Change_My_Turn(self):
-        if self.my_turn is False:
+        if main_state.monster.hp <= 0:
+            return
+
+        elif self.my_turn is False:
             self.my_turn = True
         else:
             self.my_turn = False
