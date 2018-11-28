@@ -152,8 +152,9 @@ class Player:
         wav = load_wav('music\\sword.wav')
         wav.set_volume(128)
 
-        wav.play()
+        # wav.play()
         if self.frame is 9:
+            wav.play()
             if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
                 main_state.monster.hp -= 1
 

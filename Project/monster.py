@@ -25,7 +25,7 @@ class Monster:
         self.attack_state_pos = [(10, 300, 70, 70), (85, 305, 70, 70), (160, 305, 70, 75), (240, 305, 70, 75), (300, 305, 70, 75), (380, 305, 70, 75), (475, 305, 70, 75), (565, 305, 70, 75)]
 
         self.on_tile = 8
-        self.game_clear = load_image('sprites/player/clear.png')
+        self.game_clear = load_image('sprites\\player\\clear.png')
 
     def update(self):
         if self.my_turn is False:
@@ -35,7 +35,7 @@ class Monster:
                 self.my_turn = True
                 self.now_animation = RUN_STATE
 
-        elif self.now_animation is IDLE_STATE:
+        elif self.now_animation is IDLE_STATE or self.hp <= 0:
             self.Idle_Animation()
         elif self.now_animation is RUN_STATE:
             self.Run_Animation()
@@ -86,10 +86,10 @@ class Monster:
 
     def My_Next_Action(self):
         if self.my_turn is True:
-           next_action = random.randint(1, 3)
+            next_action = random.randint(1, 2)
 
-           if self.on_tile is 2 or self.on_tile is 6 or self.on_tile is 10:
+            if self.on_tile is 2 or self.on_tile is 6 or self.on_tile is 10:
                next_action = ATTACK_STATE
 
-           self.now_animation = next_action
-           self.frame = 0
+            self.now_animation = next_action
+            self.frame = 0
