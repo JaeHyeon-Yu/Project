@@ -71,7 +71,8 @@ class Monster:
             self.Change_to_IDLE()
             main_state.turn += 1
             self.Change_My_Turn()
-            main_state.hero.hp.hp -= self.damage
+            if main_state.hero.on_tile <= self.on_tile and self.on_tile <= main_state.hero.on_tile + 1:
+                main_state.hero.hp.hp -= self.damage
 
     def Change_to_IDLE(self):
         self.now_animation = IDLE_STATE

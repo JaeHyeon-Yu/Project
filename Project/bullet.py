@@ -14,7 +14,7 @@ class Bullet:
           #  game_world.remove_object(self)
         hero = main_state.get_player()
         monster = main_state.get_monster()
-        if monster.x <= self.x and self.bullet_is_fly is True:
+        if monster.x <= self.x and monster.y-50 <= self.y and self.y <= monster.y + 50 and self.bullet_is_fly is True:
             hero.Change_My_Turn()
             monster.hp -= 5
             self.bullet_is_fly = False
