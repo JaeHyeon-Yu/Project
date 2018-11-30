@@ -43,7 +43,7 @@ def handle_events():
                 break
             x, y = event.x, 600 - 1 - event.y
             for card in title_state.card_stack:
-                if card.Click(x, y) is True:
+                if card.Click(x, y) is True and hero.now_animation is 0:
                     if hero.Use_Possible(card.number) is False:
                         return
                     hero.update_animation(card.number)

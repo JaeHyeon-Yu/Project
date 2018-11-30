@@ -238,3 +238,11 @@ class Player:
             for i in range(9, 13):
                 if self.on_tile is i:
                     return False
+
+        if card is 9:
+            if self.mp.mp < 3:
+                return False
+
+        if card is 10:
+            if self.mp.mp < 5:
+                return False
