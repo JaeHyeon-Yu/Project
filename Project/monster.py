@@ -15,6 +15,7 @@ class Monster:
         self.now_animation = IDLE_STATE
         self.my_turn = False
         self.num_of_turn = 0
+        self.font = load_font('ENCR10B.TTF', 16)
 
         self.hp, self.mp =  5, 5
         self.damage = 1
@@ -43,6 +44,7 @@ class Monster:
             self.Attack_Animation()
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
+        self.font.draw(self.x-50, self.y + 50, '(HP: %d)' % self.hp, (255, 255, 0))
 
         if self.hp <= 0:
             self.game_clear.draw(400, 300)
