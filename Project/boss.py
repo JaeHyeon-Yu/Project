@@ -20,7 +20,7 @@ class Boss:
         self.damage = 5
         self.image = load_image('sprites\\Enermy\\boss.png')
 
-        self.idle_animation = []
+        self.idle_animation = [(800, 1780, 100, 100)]
 
         self.on_tile = 8
         self.game_clear = load_image('sprites\\player\\clear.png')

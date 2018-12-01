@@ -54,7 +54,6 @@ class Monster:
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
         self.frame = (self.frame + 1) % 8
         self.x -= 200 // 8
-
         if self.frame is 7:
             self.Change_to_IDLE()
             self.on_tile -= 1
@@ -71,7 +70,10 @@ class Monster:
             self.Change_to_IDLE()
             main_state.turn += 1
             self.Change_My_Turn()
+
             if main_state.hero.on_tile <= self.on_tile and self.on_tile <= main_state.hero.on_tile + 1:
+                if main_state.hero.buff.buff_on is True:
+                    main_state.hero.buff.update()
                 main_state.hero.hp.hp -= self.damage
 
     def Change_to_IDLE(self):

@@ -39,7 +39,7 @@ class Player:
 
         self.gun_is_fired = False
         self.bullet = None
-        self.buff = None
+        self.buff = Barrier(self.x, self.y)
 
         self.now_animation = IDLE_STATE
         self.Idle_animation_pos = [(0, 900, 75, 100), (75, 900, 75, 100)]   # 0
@@ -60,6 +60,7 @@ class Player:
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
         self.hp.draw()
         self.mp.draw()
+        self.buff.draw()
         if self.gun_is_fired is True:
             self.bullet.draw()
     def update(self):
@@ -113,6 +114,8 @@ class Player:
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
         self.x += 200 // 16
+        if self.buff.buff_on is True:
+            self.buff.Pos_Update(self.x, self.y)
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile += 1
@@ -121,6 +124,8 @@ class Player:
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
         self.x -= 200 // 16
+        if self.buff.buff_on is True:
+            self.buff.Pos_Update(self.x, self.y)
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile -= 1
@@ -131,7 +136,8 @@ class Player:
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
         self.y += 200//16
-
+        if self.buff.buff_on is True:
+            self.buff.Pos_Update(self.x, self.y)
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile -= 4
@@ -140,7 +146,8 @@ class Player:
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
         self.y -= 200 // 16
-
+        if self.buff.buff_on is True:
+            self.buff.Pos_Update(self.x, self.y)
         if self.frame is 15:
             self.Change_to_IDLE()
             self.on_tile += 4
@@ -156,25 +163,21 @@ class Player:
         if self.frame is 9:
             wav.play()
             if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
-                main_state.monster.hp -= 1
+                main_state.monster.hp -= 2
 
             self.Change_My_Turn()
             self.Change_to_IDLE()
     def Defense_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
         self.now_animation = IDLE_STATE
+        self.buff.Pos_Update(self.x, self.y)
+        self.buff.update()
         self.frame = 0
         self.Change_My_Turn()
     def Heal_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
         self.hp.update(-2)
         self.now_animation = IDLE_STATE
         self.Change_My_Turn()
     def Mana_Animation(self):
-        self.size_x = 75
-        self.size_y = 100
         self.mp.update(-2)
         self.now_animation = IDLE_STATE
         self.Change_My_Turn()
