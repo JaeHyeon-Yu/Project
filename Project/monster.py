@@ -4,7 +4,10 @@ import random
 
 IDLE_STATE = 0
 RUN_STATE = 1
-ATTACK_STATE = 2
+BACK_STATE = 2
+UP_STATE = 3
+DOWN_STATE = 4
+ATTACK_STATE = 5
 
 class Monster:
     def __init__(self):
@@ -42,6 +45,13 @@ class Monster:
             self.Run_Animation()
         elif self.now_animation is ATTACK_STATE:
             self.Attack_Animation()
+        elif self.now_animation is BACK_STATE:
+            self.Back_Animation()
+        elif self.now_animation is UP_STATE:
+            self.Up_Animation()
+        elif self.now_animation is DOWN_STATE:
+            self.Down_Animation()
+
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
         self.font.draw(self.x-50, self.y + 50, '(HP: %d)' % self.hp, (255, 255, 0))
@@ -116,11 +126,20 @@ class Monster:
             main_state.hero.Change_My_Turn()
 
     def My_Next_Action(self):
+        hero = main_state.get_player()
         if self.my_turn is True:
-            next_action = random.randint(1, 2)
+            if self.y + 50 < hero.y:
+                next_action = UP_STATE
 
-            if self.on_tile is 2 or self.on_tile is 6 or self.on_tile is 10:
-               next_action = ATTACK_STATE
+            elif self.y - 50 > hero.y:
+                next_action = DOWN_STATE
+
+            elif self.on_tile < hero.on_tile and self.x + 100 < hero.x:
+                next_action = BACK_STATE
+            elif hero.x < self.x and hero.on_tile < self.on_tile:
+                next_action = RUN_STATE
+            else:
+                next_action = ATTACK_STATE
 
             self.now_animation = next_action
             self.frame = 0
