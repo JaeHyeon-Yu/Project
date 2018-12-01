@@ -53,6 +53,8 @@ def handle_events():
             if turn is 3 or monster.hp <= 0:
                 for card in title_state.card_stack:
                     card.delete()
+                for card in title_state.deck:
+                    card.use = False
                 turn = 0
                 title_state.stack = 0
                 game_framework.pop_state()

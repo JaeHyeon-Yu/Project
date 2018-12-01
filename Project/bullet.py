@@ -10,8 +10,6 @@ class Bullet:
 
     def update(self):
         self.x += 20
-        # if self.x > 400:
-          #  game_world.remove_object(self)
         hero = main_state.get_player()
         monster = main_state.get_monster()
         if monster.x <= self.x and monster.y-50 <= self.y and self.y <= monster.y + 50 and self.bullet_is_fly is True:

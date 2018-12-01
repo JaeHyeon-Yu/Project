@@ -163,7 +163,7 @@ class Player:
 
         if self.frame is 9:
             wav.play()
-            if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
+            if self.on_tile == main_state.monster.on_tile:
                 main_state.monster.hp -= 2
 
             self.Change_My_Turn()

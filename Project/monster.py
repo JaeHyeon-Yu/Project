@@ -109,7 +109,7 @@ class Monster:
             main_state.turn += 1
             self.Change_My_Turn()
 
-            if main_state.hero.on_tile <= self.on_tile and self.on_tile <= main_state.hero.on_tile + 1:
+            if main_state.hero.on_tile == self.on_tile:
                 if main_state.hero.buff.buff_on is True:
                     main_state.hero.buff.update()
                 main_state.hero.hp.hp -= self.damage

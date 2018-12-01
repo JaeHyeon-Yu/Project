@@ -34,4 +34,5 @@ class Card:
             return False
 
     def delete(self):
+        self.image = None
         self.use = True
