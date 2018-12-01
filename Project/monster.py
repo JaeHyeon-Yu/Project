@@ -54,7 +54,7 @@ class Monster:
 
     def draw(self):
         self.image.clip_draw(self.frame_x, self.frame_y, self.size_x, self.size_y, self.x, self.y)
-        self.font.draw(self.x-50, self.y + 50, '(HP: %d)' % self.hp, (255, 255, 0))
+        self.font.draw(self.x-50, self.y + 45, '(HP: %d)' % self.hp, (255, 0, 0))
 
         if self.hp <= 0:
             self.game_clear.draw(400, 300)
@@ -83,7 +83,7 @@ class Monster:
     def Up_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
         self.frame = (self.frame + 1) % 8
-        self.y += 200 // 8
+        self.y += 160 // 8
         if self.frame is 7:
             self.Change_to_IDLE()
             self.on_tile -= 1
@@ -92,7 +92,7 @@ class Monster:
     def Down_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
         self.frame = (self.frame + 1) % 8
-        self.y -= 200 // 8
+        self.y -= 160 // 8
         if self.frame is 7:
             self.Change_to_IDLE()
             self.on_tile -= 1

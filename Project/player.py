@@ -136,7 +136,7 @@ class Player:
     def Jump_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
-        self.y += 200//16
+        self.y += 160//16
         if self.buff.buff_on is True:
             self.buff.Pos_Update(self.x, self.y)
         if self.frame is 15:
@@ -147,7 +147,7 @@ class Player:
     def Down_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
-        self.y -= 200 // 16
+        self.y -= 160 // 16
         if self.buff.buff_on is True:
             self.buff.Pos_Update(self.x, self.y)
         if self.frame is 15:
