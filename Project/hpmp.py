@@ -11,7 +11,6 @@ class Hp:
         if self.hp > 10:
             self.hp = 10
 
-
     def draw(self):
         self.image.clip_draw(0, 20 * (10 - self.hp), 30, self.hp * 20, 30, 300)
 
@@ -25,7 +24,6 @@ class Mp:
         self.mp -= num
         if self.mp > 10:
             self.mp = 10
-
 
     def draw(self):
         self.image.clip_draw(0, 20*(10-self.mp), 30, self.mp*20, 800-30, 300)

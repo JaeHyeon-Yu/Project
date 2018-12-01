@@ -17,8 +17,8 @@ class Monster:
         self.num_of_turn = 0
         self.font = load_font('ENCR10B.TTF', 16)
 
-        self.hp, self.mp =  5, 5
-        self.damage = 1
+        self.hp, self.mp =  10, 10
+        self.damage = 2
         self.image = load_image('sprites\\Enermy\\grunt2.png')
 
         self.idle_state_pos = [(0, 790, 80, 70), (70, 790, 80, 70), (140, 790, 80, 70)]
@@ -61,7 +61,33 @@ class Monster:
             self.on_tile -= 1
             main_state.turn += 1
             self.Change_My_Turn()
-
+    def Back_Animation(self):
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
+        self.frame = (self.frame + 1) % 8
+        self.x += 200 // 8
+        if self.frame is 7:
+            self.Change_to_IDLE()
+            self.on_tile -= 1
+            main_state.turn += 1
+            self.Change_My_Turn()
+    def Up_Animation(self):
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
+        self.frame = (self.frame + 1) % 8
+        self.y += 200 // 8
+        if self.frame is 7:
+            self.Change_to_IDLE()
+            self.on_tile -= 1
+            main_state.turn += 1
+            self.Change_My_Turn()
+    def Down_Animation(self):
+        self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_state_pos[self.frame]
+        self.frame = (self.frame + 1) % 8
+        self.y -= 200 // 8
+        if self.frame is 7:
+            self.Change_to_IDLE()
+            self.on_tile -= 1
+            main_state.turn += 1
+            self.Change_My_Turn()
     def Attack_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.attack_state_pos[self.frame]
         self.frame = (self.frame+1) % 8

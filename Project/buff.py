@@ -17,4 +17,4 @@ class Barrier:
             self.buff_on = False
 
     def Pos_Update(self, x, y):
-        self.x, self.y = x, y-5
+        self.x, self.y = x, y - 5

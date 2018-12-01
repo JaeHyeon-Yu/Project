@@ -120,6 +120,7 @@ class Player:
             self.Change_to_IDLE()
             self.on_tile += 1
             self.Change_My_Turn()
+
     def Back_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
@@ -142,6 +143,7 @@ class Player:
             self.Change_to_IDLE()
             self.on_tile -= 4
             self.Change_My_Turn()
+
     def Down_Animation(self):
         self.frame_x, self.frame_y, self.size_x, self.size_y = self.run_animation_pos[self.frame]
         self.frame = (self.frame + 1) % 16
@@ -159,7 +161,6 @@ class Player:
         wav = load_wav('music\\sword.wav')
         wav.set_volume(128)
 
-        # wav.play()
         if self.frame is 9:
             wav.play()
             if self.on_tile <= main_state.monster.on_tile and main_state.monster.on_tile <= self.on_tile + 1:
