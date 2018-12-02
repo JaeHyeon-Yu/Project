@@ -7,16 +7,19 @@ name= "TitleState"
 image= None
 card_stack = [game_class.Card() for i in range(5)]  # 턴 시작전 사용할 카드 선정!
 stack = 0
-
 deck = None
 turn = 0
+kill_monster = 0
+font = None
 
 def enter():
     global image
     global deck
+    global font
     deck = [game_class.Card() for card in range(10)]
     image = load_image('sprites\\map\\cardselect.png')
-    
+    font = load_font('ENCR10B.TTF', 16)
+
     deck[0].Initialize(1, load_image('sprites\\card\\001.png'), 170 + 114 * 0, 480)
     deck[1].Initialize(2, load_image('sprites\\card\\002.png'), 170 + 114 * 1, 480)
     deck[2].Initialize(3, load_image('sprites\\card\\003.png'), 170 + 114 * 2, 480)
@@ -48,9 +51,6 @@ def handle_events():
                 game_framework.quit()
 
             elif event.type ==SDL_KEYDOWN and event.key==SDLK_SPACE and stack==5:
-                # if turn >= 1:
-                    # game_framework.cur_state(main_state)
-
                 game_framework.push_state(main_state)
                 turn += 1
 
@@ -76,9 +76,8 @@ def handle_events():
 
 def draw():
     global image
-    global stack
     global deck
-    global select
+    global font, kill_monster
 
 
     clear_canvas()
@@ -90,7 +89,7 @@ def draw():
     for card in card_stack:
         if card.image != None:
             card.draw()
-
+    font.draw(620, 570, '(Kill Enermy: %d)' % kill_monster, (0, 0, 255))
     update_canvas()
 
 def update():

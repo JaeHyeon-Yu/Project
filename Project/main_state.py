@@ -34,6 +34,7 @@ def exit():
 
 def handle_events():
     global turn
+    global monster
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -55,6 +56,9 @@ def handle_events():
                     card.delete()
                 for card in title_state.deck:
                     card.use = False
+                monster = game_class.Monster()
+                hero.Change_My_Turn()
+                title_state.kill_monster += 1
                 turn = 0
                 title_state.stack = 0
                 game_framework.pop_state()
@@ -63,6 +67,7 @@ def draw():
     clear_canvas()
     map.draw()
     image.draw(400, 300)
+    title_state.font.draw(620, 570, '(Kill Enermy: %d)' % title_state.kill_monster, (0, 0, 255))
 
     hero.draw()
     monster.draw()
