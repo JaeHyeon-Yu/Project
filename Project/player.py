@@ -34,7 +34,7 @@ class Player:
         self.size_x, self.size_y = 80, 100
         self.image = load_image('sprites\\player\\zerox.png')
         self.my_turn = True
-
+        self.die = load_image('sprites\\player\\youdie.png')
         self.hp, self.mp = Hp(), Mp()
 
         self.gun_is_fired = False
@@ -59,6 +59,9 @@ class Player:
         self.hp.draw()
         self.mp.draw()
         self.buff.draw()
+        if self.hp.hp <= 0:
+            self.die.draw(400, 300)
+
         if self.gun_is_fired is True:
             self.bullet.draw()
     def update(self):

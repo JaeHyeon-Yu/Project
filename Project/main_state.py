@@ -2,6 +2,7 @@ from pico2d import *
 import game_framework
 import title_state
 import game_class
+import start_state
 import game_world
 
 
@@ -10,7 +11,7 @@ hero = None
 map = None
 image = None
 monster = None
-
+monster_max_hp = 10
 turn = 0
 
 def enter():
@@ -27,14 +28,14 @@ def enter():
     map = game_class.Background(0)
 
     global monster
-    monster = game_class.Monster()
+    monster = game_class.Monster(monster_max_hp)
 
 def exit():
     global image
 
 def handle_events():
     global turn
-    global monster
+    global monster, monster_max_hp
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -56,12 +57,16 @@ def handle_events():
                     card.delete()
                 for card in title_state.deck:
                     card.use = False
-                monster = game_class.Monster()
-                hero.Change_My_Turn()
-                title_state.kill_monster += 1
+                if monster.hp <= 0:
+                    monster_max_hp += 5
+                    monster = game_class.Monster(monster_max_hp)
+                    hero.Change_My_Turn()
+                    title_state.kill_monster += 1
                 turn = 0
                 title_state.stack = 0
                 game_framework.pop_state()
+            elif hero.hp.hp <= 0:
+                game_framework.change_state(start_state)
 
 def draw():
     clear_canvas()
@@ -75,7 +80,7 @@ def draw():
     for card in title_state.card_stack:
         card.draw()
     update_canvas()
-    delay(0.2)
+    delay(0.1)
 
 def update():
     hero.update()

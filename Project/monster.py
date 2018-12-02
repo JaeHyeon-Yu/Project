@@ -10,7 +10,7 @@ DOWN_STATE = 4
 ATTACK_STATE = 5
 
 class Monster:
-    def __init__(self):
+    def __init__(self, maxhp):
         self.x, self.y = 700, 410
         self.frame_x, self.frame_y = None, None
         self.size_x, self.size_y = None, None
@@ -20,7 +20,7 @@ class Monster:
         self.num_of_turn = 0
         self.font = load_font('ENCR10B.TTF', 16)
 
-        self.hp, self.mp =  10, 10
+        self.hp, self.mp =  maxhp, maxhp
         self.damage = 2
         self.image = load_image('sprites\\Enermy\\grunt2.png')
 
