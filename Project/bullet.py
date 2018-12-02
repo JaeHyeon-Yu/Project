@@ -5,7 +5,7 @@ import main_state
 class Bullet:
     def __init__(self, x, y):
         self.x, self.y = x + 70, y
-        self.image = load_image('sprites\\player\\bullet.png')
+        self.image = load_image('.\\sprites\\player\\bullet.png')
         self.bullet_is_fly = True
 
     def update(self):
